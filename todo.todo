@@ -1,0 +1,8 @@
+☐ Divide components into different modules
+☐ Fix import statements in modules
+☐ Consider resplitting `MovementSystem` tags
+☐ Consider getting rid of the multiple iterators and opt for more `component_for_entity` instead
+☐ Read some examples of ECS code
+☐ Move this into projects eventually
+☐ don't forget git commits are for pussies
+
