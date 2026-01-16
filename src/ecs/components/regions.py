@@ -23,11 +23,11 @@ class Link:
     A given moving entity's location (ID of a link entity)
     """
     label: Label
-    length: float
+    length: int
 
 @dataclass
 class Length:
-    length: float
+    length: int
 
 @dataclass
 class Links:

@@ -21,10 +21,6 @@ class Velocity:
     magnitude: float
 
 @dataclass
-class MovementState:
-    state: MoveState
-
-@dataclass
 class AllowedMoveStates:
     states: set[MoveState]
 

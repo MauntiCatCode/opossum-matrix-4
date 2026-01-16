@@ -2,8 +2,8 @@ import esper
 
 from collections import deque
 
-from components.movement import MovementState, AllowedMoveStates, Route, Velocity, LinkProgress
-from components.regions import NextNode, Link
+from components.movement import MoveState, AllowedMoveStates, Route, LinkProgress
+from components.regions import NextNode
 from components.tags import VelocityDue, LinkDue, LinkRegionsDue, EndRoute
 from components.labels import Label
 
@@ -15,10 +15,7 @@ def movestate_valid(entity: int, movestate: MoveState) -> bool:
     return allowed and movestate in allowed.states
 
 def set_movestate(ent: int, state: MoveState):
-    if state_inst := esper.try_component(ent, MovementState):
-        state_inst.state = state
-    else:
-        esper.add_component(ent, MovementState(state))
+    esper.add_component(ent, state)
 
     # Signal to VelocitySystem
     esper.add_component(ent, VelocityDue())
@@ -45,9 +42,12 @@ def route_exists(*route: Label) -> bool:
 def start_route(ent: int, *route: Label) -> bool:
     if not route_exists():
         return False 
-    if (esper.has_component(ent, Route)
-        or esper.has_component(ent, NextNode)
-        or esper.has_component(ent, LinkProgress)):
+    
+    if any((
+        esper.has_component(ent, Route),
+        esper.has_component(ent, NextNode),
+        esper.has_component(ent, LinkProgress)
+        )):
         return False
     
     set_route(ent, *route)

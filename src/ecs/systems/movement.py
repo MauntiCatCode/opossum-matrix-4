@@ -1,6 +1,6 @@
 import esper
 
-from components.movement import Route, MovementState, Velocity, LinkProgress
+from components.movement import Route, MoveState, Velocity, LinkProgress
 from components.regions import Regions, Node, NextNode, Link, Length
 from components.tags import AdvanceRoute, EndRoute, VelocityDue, LinkDue, NodeRegionsDue, LinkRegionsDue
 from components.labels import LabelEntityMap
@@ -8,22 +8,22 @@ from components.time import DeltaTime
 
 from utils import untag_all, try_remove_components
 
+MOVEMENT_COMPONENTS = {
+    Route,
+    NextNode,
+    MoveState,
+    Velocity,
+    Link,
+    LinkProgress,
+    # Tags
+    EndRoute,
+    AdvanceRoute,
+    VelocityDue,
+    LinkDue,
+    LinkRegionsDue
+}
 
 class MovementSystem(esper.Processor):
-    OWNED_COMPONENTS = {
-        Route,
-        NextNode,
-        MovementState,
-        Velocity,
-        Link,
-        LinkProgress,
-        # Tags
-        EndRoute,
-        AdvanceRoute,
-        VelocityDue,
-        LinkDue,
-        LinkRegionsDue
-    }
 
 # --- Processor implementation ---
     def __init__(self, singleton_entity: int = 1):
@@ -38,7 +38,7 @@ class MovementSystem(esper.Processor):
 
     def _end_routes(self):
         for ent, _ in esper.get_component(EndRoute):
-            try_remove_components(ent, *self.OWNED_COMPONENTS)
+            try_remove_components(ent, *MOVEMENT_COMPONENTS)
             # Signal to RegionsSystem
             esper.add_component(ent, NodeRegionsDue())
 
@@ -59,9 +59,8 @@ class MovementSystem(esper.Processor):
     def _advance_routes(self):
         for ent, (route, node, nxt, _) in esper.get_components(Route, Node, NextNode, AdvanceRoute):
             try:
-                route.nodes.popleft()
+                nxt.label = route.nodes.popleft()
                 node.label = nxt.label
-                nxt.label = route.nodes[0]
 
             except IndexError:
                 esper.add_component(ent, EndRoute())

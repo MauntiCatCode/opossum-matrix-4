@@ -1,14 +1,20 @@
 import esper
 
+from uuid import uuid1, uuid4
 from datetime import datetime
 
 from enums import MoveState
 from components.labels import Label
 from components.regions import Regions, Node, Length, Links 
-from components.tags import NewEntity
+from components.tags import UnregisteredLabel
 from components.movement import AllowedMoveStates, BaseVelocityMap
 from components.time import GlobalTime, DeltaTime
 from components.modifiers import VelocityMod
+
+def new_labels(n: int) -> tuple[Label, ...]:
+    return tuple(Label(uuid1()) for i in range(n))
+
+PLAYER, LINK, NODE_A, NODE_B, REGION_A, REGION_B = new_labels(6)
 
 def create_test_entities():
     esper.create_entity(
@@ -17,8 +23,8 @@ def create_test_entities():
     )
 
     esper.create_entity(
-        Label(2),
-        Node(Label(4)),
+        PLAYER,
+        Node(NODE_B),
         AllowedMoveStates({
             MoveState.WALK,
             MoveState.RUN
@@ -27,41 +33,39 @@ def create_test_entities():
             MoveState.WALK: 1,
             MoveState.RUN: 2
         }),
-        NewEntity()
+        UnregisteredLabel()
     )
 
-    # Link
     esper.create_entity(
-        Label(3),
+        LINK,
         Length(1),
-        Regions({Label(6)}),
-        NewEntity()
+        Regions({REGION_A}),
+        UnregisteredLabel()
     )
 
-    # Nodes
     esper.create_entity(
-        Label(4),
-        Links({Label(5): Label(3)}),
-        Regions({Label(7)}),
-        NewEntity()
+        NODE_A,
+        Links({NODE_B: LINK}),
+        Regions({REGION_B}),
+        UnregisteredLabel()
     )
     esper.create_entity(
-        Label(5),
-        Links({Label(4): Label(3)}),
-        Regions({Label(7)}),
-        NewEntity()
+        NODE_B,
+        Links({NODE_A: LINK}),
+        Regions({REGION_B}),
+        UnregisteredLabel()
     )
 
     # Regions
     esper.create_entity(
-        Label(6),
+        REGION_A,
         VelocityMod({
             MoveState.WALK: 1,
             MoveState.RUN: 0.5
         })
     )
     esper.create_entity(
-        Label(7),
+        REGION_B,
         VelocityMod({
             MoveState.WALK: 0.5,
             MoveState.RUN: 0.7

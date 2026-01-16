@@ -1,13 +1,12 @@
 from bidict import bidict
-from typing import Hashable
+from uuid import UUID
 from dataclasses import dataclass
 
 from .tags import NonPersistent
 
-
 @dataclass(frozen=True)
 class Label:
-    label: Hashable
+    id: UUID
 
 @dataclass
 class LabelEntityMap(NonPersistent):
@@ -15,10 +14,10 @@ class LabelEntityMap(NonPersistent):
 
 @dataclass
 class Name:
-    name: str
+    value: str
 
 @dataclass
 class Description:
-    text: str
+    value: str
 
 

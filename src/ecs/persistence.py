@@ -2,7 +2,8 @@ import esper
 
 import jsonpickle as jp
 
-from components.tags import NonPersistent, NewEntity
+from components.tags import NonPersistent
+from utils import add_new_entity
 
 def get_all_persistent_components():
     component_lists = []
@@ -26,9 +27,7 @@ def load_entities(path):
         complists = jp.decode(f.read(), keys=True)
 
     for comps in complists:
-        ent = esper.create_entity(*comps)
-        esper.add_component(ent, NewEntity())
-
+        add_new_entity(*comps)
         
 
 

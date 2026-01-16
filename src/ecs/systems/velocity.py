@@ -1,6 +1,6 @@
 import esper
 
-from components.movement import Velocity, MovementState, BaseVelocityMap
+from components.movement import Velocity, MoveState, BaseVelocityMap
 from components.modifiers import VelocityMod
 from components.labels import LabelEntityMap
 from components.regions import Regions
@@ -20,22 +20,22 @@ class VelocitySystem(esper.Processor):
         untag_all(VelocityDue)
 
     def _apply_regional_mods(self):
-        for ent, (v, rg, move, _) in esper.get_components(Velocity, Regions, MovementState, VelocityDue):
+        for ent, (v, rg, state, _) in esper.get_components(Velocity, Regions, MoveState, VelocityDue):
             for r in rg.regions:
                 try:
                     mod = esper.component_for_entity(self._label_map[r], VelocityMod)
-                    v.magnitude *= mod.coefficients[move.state]
+                    v.magnitude *= mod.coefficients[state]
                 
                 except KeyError:
                     continue
                 
     def _set_base_velocities(self):
-        for ent, (move, v_map, _) in esper.get_components(MovementState, BaseVelocityMap, VelocityDue):
+        for ent, (state, v_map, _) in esper.get_components(MoveState, BaseVelocityMap, VelocityDue):
             try:
-                v = v_map.magnitude_map[move.state]
+                v = v_map.magnitude_map[state]
             
             except KeyError:
-                raise MovementError(f"Entity {ent}: {move.state} not in {v_map}")
+                raise MovementError(f"Entity {ent}: {state} not in {v_map}")
             
             else:
                 esper.add_component(ent, Velocity(v))
