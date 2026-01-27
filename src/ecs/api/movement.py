@@ -10,6 +10,7 @@ from ..enums import MoveState
 
 from .labels import label_exists
 
+
 def movestate_valid(entity: int, movestate: MoveState) -> bool:
     allowed = esper.try_component(entity, AllowedMoveStates) or False
     return allowed and movestate in allowed.states

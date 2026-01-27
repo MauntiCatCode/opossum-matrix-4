@@ -1,8 +1,7 @@
 import esper
 import jsonpickle as jp
 
-from ..components.labels import Label
-from ..components.tags import NonPersistent, UnregisteredLabel
+from ..components.tags import NonPersistent, Unregistered
 
 def _get_all_persistent_components():
     component_lists = []
@@ -31,8 +30,7 @@ def load_entities(path) -> int:
 
     for comps in complists:
         ent = esper.create_entity(*comps)
-        if esper.has_component(ent, Label):
-            esper.add_component(ent, UnregisteredLabel)
+        esper.add_component(ent, Unregistered())
         
     return len(complists)
         

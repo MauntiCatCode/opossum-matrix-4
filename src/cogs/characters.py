@@ -1,7 +1,6 @@
 import discord
 import esper
 
-from ecs.components.regions import Node
 from ecs.components.labels import Name
 from ecs.api.discord import get_user_entity, create_user_entity
 
