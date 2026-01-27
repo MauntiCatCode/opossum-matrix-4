@@ -31,7 +31,7 @@ class Length:
 
 @dataclass
 class Links:
-    # Map of nodes and links connected to them
+    """Map of nodes and links connecting a given location to them"""
     map: dict[Label, Label]
 
 @dataclass

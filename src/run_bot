@@ -29,7 +29,7 @@ async def on_ready():
     quantity = load_entities(DATA_PATH/"world.json")
     log.info(f"Loaded {quantity} entities.")
     init_systems(ALL_SYSTEMS, singleton_entity=1)
-    log.info(f"ECS Systems initialized.")
+    log.info("ECS Systems initialized.")
     
     while True:
         esper.process()

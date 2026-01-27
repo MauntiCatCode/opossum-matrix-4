@@ -23,8 +23,6 @@ MOVEMENT_COMPONENTS = {
 }
 
 class MovementSystem(esper.Processor):
-
-# --- Processor implementation ---
     def __init__(self, singleton_entity: int = 1):
         self._delta_time = esper.component_for_entity(singleton_entity, DeltaTime)
         self._label_map = esper.component_for_entity(singleton_entity, LabelEntityMap).map
