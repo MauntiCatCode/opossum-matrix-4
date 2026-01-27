@@ -1,6 +1,6 @@
 import esper
 
-from ..components.labels import LabelEntityMap
+from ..components.labels import Label,EntityRegistry
 from ..components.regions import Regions, Node, NextNode, Link, Length, Links
 from ..components.tags import LinkDue, NodeRegionsDue, LinkRegionsDue
 from ..utils import untag_all
@@ -8,7 +8,7 @@ from ..utils import untag_all
 
 class RegionsSystem(esper.Processor):
     def __init__(self, singleton_entity: int = 1):
-        self._label_map = esper.component_for_entity(singleton_entity, LabelEntityMap).map
+        self._label_map = esper.component_for_entity(singleton_entity, EntityRegistry).maps[Label]
     
     def process(self):
         self._assign_links()

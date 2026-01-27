@@ -1,21 +1,23 @@
-from bidict import bidict
-
 from uuid import UUID
 from dataclasses import dataclass
 
-from .tags import NonPersistent
+from .tags import NonPersistent, Registrable
 
 @dataclass(frozen=True)
-class Label:
+class Label(Registrable):
     id: UUID
 
 @dataclass
-class LabelEntityMap(NonPersistent):
-    map: bidict[Label, int]
+class Name(Registrable):
+    value: str
 
 @dataclass
-class Name:
-    value: str
+class DiscordID(Registrable):
+    id: int
+
+@dataclass
+class EntityRegistry(NonPersistent):
+    maps: dict[type[Registrable], dict[Registrable, int]]
 
 @dataclass
 class Description:

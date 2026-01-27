@@ -3,7 +3,7 @@ import esper
 from ..components.movement import Route, MoveState, Velocity, LinkProgress
 from ..components.regions import Regions, Node, NextNode, Link
 from ..components.tags import AdvanceRoute, EndRoute, VelocityDue, LinkDue, NodeRegionsDue, LinkRegionsDue
-from ..components.labels import LabelEntityMap
+from ..components.labels import Label, EntityRegistry
 from ..components.time import DeltaTime
 from ..utils import untag_all, try_remove_components
 
@@ -25,7 +25,7 @@ MOVEMENT_COMPONENTS = {
 class MovementSystem(esper.Processor):
     def __init__(self, singleton_entity: int = 1):
         self._delta_time = esper.component_for_entity(singleton_entity, DeltaTime)
-        self._label_map = esper.component_for_entity(singleton_entity, LabelEntityMap).map
+        self._label_map = esper.component_for_entity(singleton_entity, EntityRegistry).maps[Label]
 
     def process(self):
         self._end_routes()

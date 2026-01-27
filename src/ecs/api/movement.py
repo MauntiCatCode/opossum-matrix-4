@@ -2,7 +2,7 @@ import esper
 
 from collections import deque
 
-from ..components.movement import MoveState, AllowedMoveStates, Route, LinkProgress
+from ..components.movement import AllowedMoveStates, Route, LinkProgress
 from ..components.regions import NextNode
 from ..components.tags import VelocityDue, LinkDue, LinkRegionsDue, EndRoute
 from ..components.labels import Label
