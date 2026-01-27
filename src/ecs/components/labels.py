@@ -1,4 +1,5 @@
 from bidict import bidict
+
 from uuid import UUID
 from dataclasses import dataclass
 

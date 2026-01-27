@@ -1,0 +1,200 @@
+[
+  [
+    {
+      "py/object": "ecs.components.discord.DiscordIDLabelMap",
+      "map": {}
+    },
+    {
+      "py/object": "ecs.components.time.GlobalTime",
+      "global_time": {
+        "py/object": "datetime.datetime",
+        "__reduce__": [
+          {
+            "py/type": "datetime.datetime"
+          },
+          [
+            "B8MBAQAAAAAAAA=="
+          ]
+        ]
+      }
+    },
+    {
+      "py/object": "ecs.components.time.DeltaTime",
+      "dt": 0
+    }
+  ],
+  [
+    {
+      "py/object": "ecs.components.labels.Label",
+      "id": {
+        "py/object": "uuid.UUID",
+        "hex": "b3554c54f4a111f080b14a828845139b"
+      }
+    },
+    {
+      "py/object": "ecs.components.regions.Node",
+      "label": {
+        "py/object": "ecs.components.labels.Label",
+        "id": {
+          "py/object": "uuid.UUID",
+          "hex": "b3554dd0f4a111f080b14a828845139b"
+        }
+      }
+    },
+    {
+      "py/object": "ecs.components.movement.AllowedMoveStates",
+      "states": {
+        "py/set": [
+          {
+            "py/reduce": [
+              {
+                "py/type": "ecs.enums.MoveState"
+              },
+              {
+                "py/tuple": [
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "py/reduce": [
+              {
+                "py/type": "ecs.enums.MoveState"
+              },
+              {
+                "py/tuple": [
+                  2
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "py/object": "ecs.components.movement.BaseVelocityMap",
+      "magnitude_map": {
+        "json://{\"py/id\": 14}": 1,
+        "json://{\"py/id\": 15}": 2
+      }
+    },
+    {
+      "py/object": "ecs.components.tags.UnregisteredLabel"
+    }
+  ],
+  [
+    {
+      "py/object": "ecs.components.labels.Label",
+      "id": {
+        "py/object": "uuid.UUID",
+        "hex": "b3554d1cf4a111f080b14a828845139b"
+      }
+    },
+    {
+      "py/object": "ecs.components.regions.Length",
+      "length": 1
+    },
+    {
+      "py/object": "ecs.components.regions.Regions",
+      "regions": {
+        "py/set": [
+          {
+            "py/object": "ecs.components.labels.Label",
+            "id": {
+              "py/object": "uuid.UUID",
+              "hex": "b3554e0cf4a111f080b14a828845139b"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "py/object": "ecs.components.tags.UnregisteredLabel"
+    }
+  ],
+  [
+    {
+      "py/object": "ecs.components.labels.Label",
+      "id": {
+        "py/object": "uuid.UUID",
+        "hex": "b3554d80f4a111f080b14a828845139b"
+      }
+    },
+    {
+      "py/object": "ecs.components.regions.Links",
+      "map": {
+        "json://{\"py/id\": 11}": {
+          "py/id": 20
+        }
+      }
+    },
+    {
+      "py/object": "ecs.components.regions.Regions",
+      "regions": {
+        "py/set": [
+          {
+            "py/object": "ecs.components.labels.Label",
+            "id": {
+              "py/object": "uuid.UUID",
+              "hex": "b3554e48f4a111f080b14a828845139b"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "py/object": "ecs.components.tags.UnregisteredLabel"
+    }
+  ],
+  [
+    {
+      "py/id": 11
+    },
+    {
+      "py/object": "ecs.components.regions.Links",
+      "map": {
+        "json://{\"py/id\": 28}": {
+          "py/id": 20
+        }
+      }
+    },
+    {
+      "py/object": "ecs.components.regions.Regions",
+      "regions": {
+        "py/set": [
+          {
+            "py/id": 33
+          }
+        ]
+      }
+    },
+    {
+      "py/object": "ecs.components.tags.UnregisteredLabel"
+    }
+  ],
+  [
+    {
+      "py/id": 24
+    },
+    {
+      "py/object": "ecs.components.modifiers.VelocityMod",
+      "coefficients": {
+        "json://{\"py/id\": 14}": 1,
+        "json://{\"py/id\": 15}": 0.5
+      }
+    }
+  ],
+  [
+    {
+      "py/id": 33
+    },
+    {
+      "py/object": "ecs.components.modifiers.VelocityMod",
+      "coefficients": {
+        "json://{\"py/id\": 14}": 0.5,
+        "json://{\"py/id\": 15}": 0.7
+      }
+    }
+  ]
+]

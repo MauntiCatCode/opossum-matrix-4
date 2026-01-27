@@ -1,2 +1,7 @@
 ✔ don't forget git commits are for pussies @done
-
+✔ Fix character not showing up in LabelEntityMap @done(26-01-19 19:37)
+✔ Move bot token to .env @done(26-01-19 19:47)
+☐ Implement `NameLabelMap: dict[Name, set[Label]]`
+☐ Think about what should happen when a user entity gets deleted (thus its label is not longer valid or present in the label map) (Maybe it could just get lazily deleted when you try to access it?)
+☐ Implement `goto <adjacent location>`
+☐ Figure out how to properly maintain these "caches"

@@ -1,0 +1,40 @@
+#!/usr/bin/python
+import esper
+import discord
+import dotenv
+
+import asyncio
+from pathlib import Path
+import os
+
+from ecs.systems import ALL_SYSTEMS, init_systems
+from ecs.api.persistence import load_entities
+
+from bot import Bot
+from log import log
+
+dotenv.load_dotenv()
+
+INTENTS = discord.Intents.all()
+DATA_PATH = Path("~/projects/opossum-matrix-4/data").expanduser()
+EVENT_LOOP_TIME = 1
+
+bot = Bot(
+    data_path=DATA_PATH,
+    intents=INTENTS
+)
+
+@bot.event
+async def on_ready():
+    quantity = load_entities(DATA_PATH/"world.json")
+    log.info(f"Loaded {quantity} entities.")
+    init_systems(ALL_SYSTEMS, singleton_entity=1)
+    log.info(f"ECS Systems initialized.")
+    
+    while True:
+        esper.process()
+        log.info(f"Singleton entity state:\n{esper.components_for_entity(1)}")
+        await asyncio.sleep(EVENT_LOOP_TIME)
+
+bot.load_extension("cogs")
+bot.run(str(os.getenv("TOKEN")))

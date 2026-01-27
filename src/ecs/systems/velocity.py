@@ -1,13 +1,12 @@
 import esper
 
-from components.movement import Velocity, MoveState, BaseVelocityMap
-from components.modifiers import VelocityMod
-from components.labels import LabelEntityMap
-from components.regions import Regions
-from components.tags import VelocityDue
-
-from utils import untag_all
-from exceptions import MovementError
+from ..components.movement import Velocity, MoveState, BaseVelocityMap
+from ..components.modifiers import VelocityMod
+from ..components.labels import LabelEntityMap
+from ..components.regions import Regions
+from ..components.tags import VelocityDue
+from ..utils import untag_all
+from ..exceptions import MovementError
 
 
 class VelocitySystem(esper.Processor):

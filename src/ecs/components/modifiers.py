@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from enums import MoveState
+from ecs.enums import MoveState
 
 
 @dataclass

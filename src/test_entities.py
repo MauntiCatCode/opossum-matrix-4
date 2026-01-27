@@ -1,15 +1,16 @@
 import esper
 
-from uuid import uuid1, uuid4
+from uuid import uuid1 
 from datetime import datetime
 
-from enums import MoveState
-from components.labels import Label
-from components.regions import Regions, Node, Length, Links 
-from components.tags import UnregisteredLabel
-from components.movement import AllowedMoveStates, BaseVelocityMap
-from components.time import GlobalTime, DeltaTime
-from components.modifiers import VelocityMod
+from ecs.enums import MoveState
+from ecs.components.labels import Label
+from ecs.components.discord import DiscordIDLabelMap
+from ecs.components.regions import Regions, Node, Length, Links 
+from ecs.components.tags import UnregisteredLabel
+from ecs.components.movement import AllowedMoveStates, BaseVelocityMap
+from ecs.components.time import GlobalTime, DeltaTime
+from ecs.components.modifiers import VelocityMod
 
 def new_labels(n: int) -> tuple[Label, ...]:
     return tuple(Label(uuid1()) for i in range(n))
@@ -18,6 +19,7 @@ PLAYER, LINK, NODE_A, NODE_B, REGION_A, REGION_B = new_labels(6)
 
 def create_test_entities():
     esper.create_entity(
+        DiscordIDLabelMap({}),
         GlobalTime(datetime(1987, 1, 1)),
         DeltaTime(0)
     )
@@ -71,3 +73,8 @@ def create_test_entities():
             MoveState.RUN: 0.7
         })
     )
+
+if __name__ == "__main__":
+    from ecs.api.persistence import save_entities
+    create_test_entities()
+    save_entities("/home/meow/projects/opossum-matrix-4/data/world.json")

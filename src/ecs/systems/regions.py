@@ -1,10 +1,9 @@
 import esper
 
-from components.labels import LabelEntityMap
-from components.regions import Regions, Node, NextNode, Link, Length, Links
-from components.tags import LinkDue, NodeRegionsDue, LinkRegionsDue
-
-from utils import untag_all
+from ..components.labels import LabelEntityMap
+from ..components.regions import Regions, Node, NextNode, Link, Length, Links
+from ..components.tags import LinkDue, NodeRegionsDue, LinkRegionsDue
+from ..utils import untag_all
 
 
 class RegionsSystem(esper.Processor):

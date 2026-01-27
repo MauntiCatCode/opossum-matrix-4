@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from collections import deque
 
-from enums import MoveState
+from ecs.enums import MoveState
+
 from .labels import Label
 
 

@@ -2,12 +2,12 @@ import esper
 
 from collections import deque
 
-from components.movement import MoveState, AllowedMoveStates, Route, LinkProgress
-from components.regions import NextNode
-from components.tags import VelocityDue, LinkDue, LinkRegionsDue, EndRoute
-from components.labels import Label
+from ..components.movement import MoveState, AllowedMoveStates, Route, LinkProgress
+from ..components.regions import NextNode
+from ..components.tags import VelocityDue, LinkDue, LinkRegionsDue, EndRoute
+from ..components.labels import Label
+from ..enums import MoveState
 
-from enums import MoveState
 from .labels import label_exists
 
 def movestate_valid(entity: int, movestate: MoveState) -> bool:

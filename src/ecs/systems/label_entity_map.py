@@ -1,10 +1,9 @@
 import esper
 from bidict import bidict
 
-
-from components.labels import Label, LabelEntityMap
-from components.tags import UnregisteredLabel
-from utils import untag_all
+from ..components.labels import Label, LabelEntityMap
+from ..components.tags import UnregisteredLabel
+from ..utils import untag_all
 
 
 class LabelEntityMapSystem(esper.Processor):

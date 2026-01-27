@@ -1,12 +1,11 @@
 import esper
 
-from components.movement import Route, MoveState, Velocity, LinkProgress
-from components.regions import Regions, Node, NextNode, Link, Length
-from components.tags import AdvanceRoute, EndRoute, VelocityDue, LinkDue, NodeRegionsDue, LinkRegionsDue
-from components.labels import LabelEntityMap
-from components.time import DeltaTime
-
-from utils import untag_all, try_remove_components
+from ..components.movement import Route, MoveState, Velocity, LinkProgress
+from ..components.regions import Regions, Node, NextNode, Link
+from ..components.tags import AdvanceRoute, EndRoute, VelocityDue, LinkDue, NodeRegionsDue, LinkRegionsDue
+from ..components.labels import LabelEntityMap
+from ..components.time import DeltaTime
+from ..utils import untag_all, try_remove_components
 
 MOVEMENT_COMPONENTS = {
     Route,
