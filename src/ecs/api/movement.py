@@ -2,22 +2,48 @@ import esper
 
 from collections import deque
 
-from ..components.movement import AllowedMoveStates, Route, LinkProgress
-from ..components.regions import Node, NextNode
+from ..components.movement import MoveState, AllowedMoveStates, Route, LinkProgress
+from ..components.regions import Node, NextNode, Links
 from ..components.tags import VelocityDue, LinkDue, LinkRegionsDue, EndRoute
 from ..components.labels import Label, EntityRegistry
-from ..enums import MoveState
-from ..utils import get_singleton_component
 
-from .labels import label_exists
+from ..utils import get_singleton_component
+from ..exceptions import PathfindingError
+
+from .labels import entity_by_label, label_exists
+
+def move(entity: int, movestate: MoveState, *route: Label) -> bool:
+    return change_movestate(entity, movestate) and start_route(entity, *route)
+
+def pathfind(pos: int, dest: int, max_depth=8) -> list[int]:
+    visited = set()
+    queue = deque([(pos, [])])
+
+    while queue:
+        node, path = queue.pop()
+        if node == dest:
+            return path
+        
+        if len(path) > max_depth:
+            raise PathfindingError(f"Max pathfinding depth of {max_depth} exceeded on {path}")
+        if node in visited:
+            continue
+        visited.add(node)
+        
+        neighbors = esper.component_for_entity(node, Links).map
+        
+        for loc in neighbors.keys():
+            loc = entity_by_label(loc)
+            path_to_loc = path.copy()
+            path_to_loc.append(loc)
+            queue.append((loc, path_to_loc))
+    
+    raise PathfindingError(f"No path found from {pos} to {dest}")
 
 def get_node_entity(ent: int) -> int:
     registry = get_singleton_component(EntityRegistry).map[Label]
     node = esper.component_for_entity(ent, Node).label
     return registry[node]
-
-def move(entity: int, movestate: MoveState, *route: Label) -> bool:
-    return change_movestate(entity, movestate) and start_route(entity, *route)
 
 def movestate_valid(entity: int, movestate: MoveState) -> bool:
     allowed = esper.try_component(entity, AllowedMoveStates) or False

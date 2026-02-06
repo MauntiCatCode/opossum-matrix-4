@@ -1,3 +1,5 @@
 ✔ Don't forget proper commits are for pussies @done(26-01-27 17:23)
-☐ Implement API for naming and renaming locations safely
+☐ Make existing systems use the registry instead of nonexistent LabelEntityMap
 ☐ Implement `/goto <location_name>`
+☐ Rework movement API to raise errors instead of returning booleans to add more informative error messages in `/goto`
+☐ Implement API for naming and renaming locations safely
