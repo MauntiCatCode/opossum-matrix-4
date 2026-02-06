@@ -3,13 +3,21 @@ import esper
 from collections import deque
 
 from ..components.movement import AllowedMoveStates, Route, LinkProgress
-from ..components.regions import NextNode
+from ..components.regions import Node, NextNode
 from ..components.tags import VelocityDue, LinkDue, LinkRegionsDue, EndRoute
-from ..components.labels import Label
+from ..components.labels import Label, EntityRegistry
 from ..enums import MoveState
+from ..utils import get_singleton_component
 
 from .labels import label_exists
 
+def get_node_entity(ent: int) -> int:
+    registry = get_singleton_component(EntityRegistry).map[Label]
+    node = esper.component_for_entity(ent, Node).label
+    return registry[node]
+
+def move(entity: int, movestate: MoveState, *route: Label) -> bool:
+    return change_movestate(entity, movestate) and start_route(entity, *route)
 
 def movestate_valid(entity: int, movestate: MoveState) -> bool:
     allowed = esper.try_component(entity, AllowedMoveStates) or False
