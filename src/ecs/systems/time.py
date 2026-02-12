@@ -3,12 +3,12 @@ import esper
 from datetime import datetime, timedelta
 
 from ..components.time import GlobalTime, DeltaTime
-
+from ..utils import get_singleton_component
 
 class TimeSystem(esper.Processor):
-    def __init__(self, singleton_entity: int = 1):
-        self._ecs_time = esper.component_for_entity(singleton_entity, GlobalTime)
-        self._ecs_dt = esper.component_for_entity(singleton_entity, DeltaTime)
+    def __init__(self):
+        self._ecs_time = get_singleton_component(GlobalTime)
+        self._ecs_dt = get_singleton_component(DeltaTime)
         self._dt = timedelta(0)
         self._real_time = datetime.now()
 

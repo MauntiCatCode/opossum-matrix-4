@@ -8,12 +8,12 @@ from utils import untag_all
 
 
 class EntityRegistrySystem(esper.Processor):
-    def __init__(self, singleton_entity: int = 1):
+    def __init__(self):
         self._dead_entities: set[int] = set()
         self._maps = {Label: {}, DiscordID: {}, Name: defaultdict(set)}
 
         esper.set_handler("kill_entity", self.kill_entity)
-        esper.add_component(singleton_entity, EntityRegistry(self._maps))
+        esper.add_component(1, EntityRegistry(self._maps))
         # Build maps at init to allow references at first tick
         self.process()
     

@@ -1,13 +1,13 @@
 import esper as _esper
 
-from .label_entity_map import LabelEntityMapSystem
+from .entity_registry import EntityRegistrySystem
 from .movement import MovementSystem
 from .time import TimeSystem
 from .velocity import VelocitySystem
 from .regions import RegionsSystem
 
 ALL_SYSTEMS: list[type[_esper.Processor]] = [
-    LabelEntityMapSystem,
+    EntityRegistrySystem,
     TimeSystem,
     RegionsSystem,
     VelocitySystem,

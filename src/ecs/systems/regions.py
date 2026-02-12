@@ -1,15 +1,12 @@
 import esper
 
-from ..components.labels import Label,EntityRegistry
 from ..components.regions import Regions, Node, NextNode, Link, Length, Links
 from ..components.tags import LinkDue, NodeRegionsDue, LinkRegionsDue
+from ..api.labels import entity_by_label
 from ..utils import untag_all
 
 
 class RegionsSystem(esper.Processor):
-    def __init__(self, singleton_entity: int = 1):
-        self._label_map = esper.component_for_entity(singleton_entity, EntityRegistry).maps[Label]
-    
     def process(self):
         self._assign_links()
         self._assign_node_regions()
@@ -17,13 +14,13 @@ class RegionsSystem(esper.Processor):
 
     def _assign_node_regions(self):
         for ent, (node, _) in esper.get_components(Node, NodeRegionsDue):
-            if node_rg := esper.try_component(self._label_map[node.label], Regions):
+            if node_rg := esper.try_component(entity_by_label(node.label), Regions):
                 esper.add_component(ent, Regions(node_rg.regions.copy()))
         
     def _assign_links(self):
         for ent, (node, nxt, _) in esper.get_components(Node, NextNode, LinkDue):
             # Check the current node for links with the next node
-            node_ent = self._label_map[node.label]
+            node_ent = entity_by_label(node.label)
             try:
                 node_links = esper.component_for_entity(node_ent, Links)
                 link_label = node_links.map[nxt.label]
@@ -32,15 +29,15 @@ class RegionsSystem(esper.Processor):
                 esper.dispatch_event("nodes_unlinked_error", ent, node.label, nxt.label)
                 continue
                 
-            link_ent = self._label_map[link_label]
+            link = entity_by_label(link_label)
             
-            if link_len := esper.try_component(link_ent, Length):
+            if link_len := esper.try_component(link, Length):
                 l = link_len.length
             else:
                 l = 0
             
             # Inherit link regions
-            if link_rg := esper.try_component(link_ent, Regions):
+            if link_rg := esper.try_component(link, Regions):
                 esper.add_component(ent, Regions(link_rg.regions.copy()))
             
             esper.add_component(ent, Link(link_label, l))

@@ -2,17 +2,14 @@ import esper
 
 from ..components.movement import Velocity, MoveState, BaseVelocityMap
 from ..components.modifiers import VelocityMod
-from ..components.labels import LabelEntityMap
 from ..components.regions import Regions
 from ..components.tags import VelocityDue
+from ..api.labels import entity_by_label
 from ..utils import untag_all
 from ..exceptions import MovementError
 
 
 class VelocitySystem(esper.Processor):
-    def __init__(self, singleton_entity: int = 1):
-        self._label_map = esper.component_for_entity(singleton_entity, LabelEntityMap).map
-    
     def process(self):
         self._set_base_velocities()
         self._apply_regional_mods()
@@ -22,7 +19,7 @@ class VelocitySystem(esper.Processor):
         for ent, (v, rg, state, _) in esper.get_components(Velocity, Regions, MoveState, VelocityDue):
             for r in rg.regions:
                 try:
-                    mod = esper.component_for_entity(self._label_map[r], VelocityMod)
+                    mod = esper.component_for_entity(entity_by_label(r), VelocityMod)
                     v.magnitude *= mod.coefficients[state]
                 
                 except KeyError:
