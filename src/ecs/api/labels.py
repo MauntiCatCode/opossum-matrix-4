@@ -4,8 +4,7 @@ from uuid import uuid1
 
 from ..components.labels import Label, Name, EntityRegistry
 from ..components.tags import Unregistered
-
-from utils import get_singleton_component
+from ..utils import get_singleton_component
 
 def entities_by_name(name: Name) -> set[int]:
     try:

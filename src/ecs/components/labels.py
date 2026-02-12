@@ -7,11 +7,11 @@ from .tags import NonPersistent, Registrable
 class Label(Registrable):
     id: UUID
 
-@dataclass
+@dataclass(frozen=True)
 class Name(Registrable):
     value: str
 
-@dataclass
+@dataclass(frozen=True)
 class DiscordID(Registrable):
     id: int
 

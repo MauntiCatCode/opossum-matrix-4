@@ -4,7 +4,7 @@ from collections import defaultdict
 
 from ..components.labels import Label, Name, DiscordID, EntityRegistry
 from ..components.tags import Registrable, Unregistered
-from utils import untag_all
+from ..utils import untag_all
 
 
 class EntityRegistrySystem(esper.Processor):

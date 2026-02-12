@@ -14,7 +14,8 @@ from ecs.api.movement import pathfind, move, get_node_entity
 
 class Movement(discord.Cog):
     @discord.slash_command()
-    async def goto(self, ctx: discord.ApplicationContext, location_name: Name, movestate: MoveState.from_str = MoveState.WALK): # pyright: ignore[reportGeneralTypeIssues]
+    async def goto(self, ctx: discord.ApplicationContext, location_name, movestate = "walk"): # pyright: ignore[reportGeneralTypeIssues]
+        location_name, movestate = Name(location_name), MoveState.from_str(movestate)
         user_ent = get_user_entity(ctx.user.id)
         locs = {loc for loc in entities_by_name(location_name) if esper.has_component(loc, LocationTag)}
         
@@ -40,4 +41,6 @@ class Movement(discord.Cog):
     @staticmethod
     async def choose_destination(ctx: discord.ApplicationContext, locations: set[int]) -> int:
         # TODO: Implement a followup where user selects its desired destination from locations
+        await ctx.respond("Go fuck yourself")
+        return 228
         ...

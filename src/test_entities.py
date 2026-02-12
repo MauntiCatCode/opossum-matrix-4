@@ -3,12 +3,10 @@ import esper
 from uuid import uuid1 
 from datetime import datetime
 
-from ecs.enums import MoveState
 from ecs.components.labels import Label
-from ecs.components.discord import DiscordIDLabelMap
 from ecs.components.regions import Regions, Node, Length, Links 
-from ecs.components.tags import UnregisteredLabel
-from ecs.components.movement import AllowedMoveStates, BaseVelocityMap
+from ecs.components.tags import Unregistered
+from ecs.components.movement import MoveState, AllowedMoveStates, BaseVelocityMap
 from ecs.components.time import GlobalTime, DeltaTime
 from ecs.components.modifiers import VelocityMod
 
@@ -19,7 +17,6 @@ PLAYER, LINK, NODE_A, NODE_B, REGION_A, REGION_B = new_labels(6)
 
 def create_test_entities():
     esper.create_entity(
-        DiscordIDLabelMap({}),
         GlobalTime(datetime(1987, 1, 1)),
         DeltaTime(0)
     )
@@ -35,27 +32,27 @@ def create_test_entities():
             MoveState.WALK: 1,
             MoveState.RUN: 2
         }),
-        UnregisteredLabel()
+        Unregistered()
     )
 
     esper.create_entity(
         LINK,
         Length(1),
         Regions({REGION_A}),
-        UnregisteredLabel()
+        Unregistered()
     )
 
     esper.create_entity(
         NODE_A,
         Links({NODE_B: LINK}),
         Regions({REGION_B}),
-        UnregisteredLabel()
+        Unregistered()
     )
     esper.create_entity(
         NODE_B,
         Links({NODE_A: LINK}),
         Regions({REGION_B}),
-        UnregisteredLabel()
+        Unregistered()
     )
 
     # Regions

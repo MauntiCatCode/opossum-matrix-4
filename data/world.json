@@ -1,10 +1,6 @@
 [
   [
     {
-      "py/object": "ecs.components.discord.DiscordIDLabelMap",
-      "map": {}
-    },
-    {
       "py/object": "ecs.components.time.GlobalTime",
       "global_time": {
         "py/object": "datetime.datetime",
@@ -28,7 +24,7 @@
       "py/object": "ecs.components.labels.Label",
       "id": {
         "py/object": "uuid.UUID",
-        "hex": "b3554c54f4a111f080b14a828845139b"
+        "hex": "a77120f4084511f1b36fde22dd6bb80e"
       }
     },
     {
@@ -37,7 +33,7 @@
         "py/object": "ecs.components.labels.Label",
         "id": {
           "py/object": "uuid.UUID",
-          "hex": "b3554dd0f4a111f080b14a828845139b"
+          "hex": "a7712266084511f1b36fde22dd6bb80e"
         }
       }
     },
@@ -48,11 +44,11 @@
           {
             "py/reduce": [
               {
-                "py/type": "ecs.enums.MoveState"
+                "py/type": "ecs.components.movement.MoveState"
               },
               {
                 "py/tuple": [
-                  1
+                  2
                 ]
               }
             ]
@@ -60,11 +56,11 @@
           {
             "py/reduce": [
               {
-                "py/type": "ecs.enums.MoveState"
+                "py/type": "ecs.components.movement.MoveState"
               },
               {
                 "py/tuple": [
-                  2
+                  1
                 ]
               }
             ]
@@ -75,12 +71,12 @@
     {
       "py/object": "ecs.components.movement.BaseVelocityMap",
       "magnitude_map": {
-        "json://{\"py/id\": 14}": 1,
-        "json://{\"py/id\": 15}": 2
+        "json://{\"py/id\": 13}": 1,
+        "json://{\"py/id\": 12}": 2
       }
     },
     {
-      "py/object": "ecs.components.tags.UnregisteredLabel"
+      "py/object": "ecs.components.tags.Unregistered"
     }
   ],
   [
@@ -88,7 +84,7 @@
       "py/object": "ecs.components.labels.Label",
       "id": {
         "py/object": "uuid.UUID",
-        "hex": "b3554d1cf4a111f080b14a828845139b"
+        "hex": "a77121bc084511f1b36fde22dd6bb80e"
       }
     },
     {
@@ -103,14 +99,14 @@
             "py/object": "ecs.components.labels.Label",
             "id": {
               "py/object": "uuid.UUID",
-              "hex": "b3554e0cf4a111f080b14a828845139b"
+              "hex": "a77122a2084511f1b36fde22dd6bb80e"
             }
           }
         ]
       }
     },
     {
-      "py/object": "ecs.components.tags.UnregisteredLabel"
+      "py/object": "ecs.components.tags.Unregistered"
     }
   ],
   [
@@ -118,14 +114,14 @@
       "py/object": "ecs.components.labels.Label",
       "id": {
         "py/object": "uuid.UUID",
-        "hex": "b3554d80f4a111f080b14a828845139b"
+        "hex": "a7712220084511f1b36fde22dd6bb80e"
       }
     },
     {
       "py/object": "ecs.components.regions.Links",
       "map": {
-        "json://{\"py/id\": 11}": {
-          "py/id": 20
+        "json://{\"py/id\": 9}": {
+          "py/id": 18
         }
       }
     },
@@ -137,25 +133,25 @@
             "py/object": "ecs.components.labels.Label",
             "id": {
               "py/object": "uuid.UUID",
-              "hex": "b3554e48f4a111f080b14a828845139b"
+              "hex": "a77122e8084511f1b36fde22dd6bb80e"
             }
           }
         ]
       }
     },
     {
-      "py/object": "ecs.components.tags.UnregisteredLabel"
+      "py/object": "ecs.components.tags.Unregistered"
     }
   ],
   [
     {
-      "py/id": 11
+      "py/id": 9
     },
     {
       "py/object": "ecs.components.regions.Links",
       "map": {
-        "json://{\"py/id\": 28}": {
-          "py/id": 20
+        "json://{\"py/id\": 26}": {
+          "py/id": 18
         }
       }
     },
@@ -164,36 +160,36 @@
       "regions": {
         "py/set": [
           {
-            "py/id": 33
+            "py/id": 31
           }
         ]
       }
     },
     {
-      "py/object": "ecs.components.tags.UnregisteredLabel"
+      "py/object": "ecs.components.tags.Unregistered"
     }
   ],
   [
     {
-      "py/id": 24
+      "py/id": 22
     },
     {
       "py/object": "ecs.components.modifiers.VelocityMod",
       "coefficients": {
-        "json://{\"py/id\": 14}": 1,
-        "json://{\"py/id\": 15}": 0.5
+        "json://{\"py/id\": 13}": 1,
+        "json://{\"py/id\": 12}": 0.5
       }
     }
   ],
   [
     {
-      "py/id": 33
+      "py/id": 31
     },
     {
       "py/object": "ecs.components.modifiers.VelocityMod",
       "coefficients": {
-        "json://{\"py/id\": 14}": 0.5,
-        "json://{\"py/id\": 15}": 0.7
+        "json://{\"py/id\": 13}": 0.5,
+        "json://{\"py/id\": 12}": 0.7
       }
     }
   ]
